@@ -66,7 +66,7 @@ model = dict(
         max_num=50))
 
 dataset_type = 'KittiDataset'
-data_root = 'data/kitti/'
+data_root = '/kaggle/working/mmdetection3d/data/kitti/'
 class_names = ['Car']
 input_modality = dict(use_lidar=False, use_camera=True)
 point_cloud_range = [0, -39.68, -3, 69.12, 39.68, 1]

@@ -1,5 +1,5 @@
 dataset_type = 'KittiMonoDataset'
-data_root = 'data/kitti/'
+data_root = '/kaggle/working/mmdetection3d/data/kitti/'
 class_names = ['Pedestrian', 'Cyclist', 'Car']
 input_modality = dict(use_lidar=False, use_camera=True)
 img_norm_cfg = dict(

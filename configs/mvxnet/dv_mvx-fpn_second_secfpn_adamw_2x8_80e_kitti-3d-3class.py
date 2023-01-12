@@ -131,7 +131,7 @@ model = dict(
 
 # dataset settings
 dataset_type = 'KittiDataset'
-data_root = 'data/kitti/'
+data_root = '/kaggle/working/mmdetection3d/data/kitti/'
 class_names = ['Pedestrian', 'Cyclist', 'Car']
 img_norm_cfg = dict(
     mean=[103.530, 116.280, 123.675], std=[1.0, 1.0, 1.0], to_rgb=False)

@@ -92,7 +92,7 @@ model = dict(
 
 # dataset settings
 dataset_type = 'KittiDataset'
-data_root = 'data/kitti/'
+data_root = '/kaggle/working/mmdetection3d/data/kitti/'
 class_names = ['Pedestrian', 'Cyclist', 'Car']
 input_modality = dict(use_lidar=False, use_camera=False)
 db_sampler = dict(
