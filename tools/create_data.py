@@ -2,12 +2,39 @@
 import argparse
 from os import path as osp
 
+from tools.data_converter import lidar_converter as lidar
 from tools.data_converter import indoor_converter as indoor
 from tools.data_converter import kitti_converter as kitti
 from tools.data_converter import lyft_converter as lyft_converter
 from tools.data_converter import nuscenes_converter as nuscenes_converter
 from tools.data_converter.create_gt_database import (
     GTDatabaseCreater, create_groundtruth_database)
+
+
+def lidar_data_prep(root_path,
+                    info_prefix,
+                    version,
+                    out_dir):
+    """Prepare data related to lidar dataset.
+
+    Related data consists of '.pkl' files recording basic infos,
+    3D annotations and groundtruth database.
+
+    Args:
+        root_path (str): Path of dataset root.
+        info_prefix (str): The prefix of info filenames.
+        version (str): Dataset version.
+        out_dir (str): Output directory of the groundtruth database info.
+    """
+    lidar.create_stairs_info_file(root_path, info_prefix)
+
+    # creates dbinfos.pkl
+    create_groundtruth_database(
+        'LidarDataset',
+        root_path,
+        info_prefix,
+        f'{out_dir}/{info_prefix}_infos_train.pkl',
+        relative_path=False)
 
 
 def kitti_data_prep(root_path,
@@ -238,7 +265,14 @@ parser.add_argument(
 args = parser.parse_args()
 
 if __name__ == '__main__':
-    if args.dataset == 'kitti':
+    if args.dataset == 'stairs':
+        lidar_data_prep(
+            root_path=args.root_path,
+            info_prefix=args.extra_tag,
+            version=args.version,
+            out_dir=args.out_dir,
+            with_plane=args.with_plane)
+    elif args.dataset == 'kitti':
         kitti_data_prep(
             root_path=args.root_path,
             info_prefix=args.extra_tag,
