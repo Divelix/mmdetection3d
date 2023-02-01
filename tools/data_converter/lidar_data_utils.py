@@ -65,7 +65,7 @@ def get_lidar_info(path,
                     num_worker=8,
                     relative_path=True):
     """
-    Stairs annotation format:
+    LIDAR annotation format:
     {
         point_cloud: {
             num_features: 4

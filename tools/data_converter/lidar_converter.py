@@ -38,11 +38,11 @@ def _calculate_num_points_in_gt(data_path,
         annos['num_points_in_gt'] = num_points_in_gt.astype(np.int32)
 
 
-def create_stairs_info_file(data_path,
-                            pkl_prefix='stairs',
-                            save_path=None,
-                            relative_path=True):
-    """Create info file of stairs dataset.
+def create_lidar_info_file(data_path,
+                           pkl_prefix='lidar',
+                           save_path=None,
+                           relative_path=True):
+    """Create info file of LIDAR dataset.
 
     Given the raw data, generate its related info file in pkl format.
 
@@ -50,8 +50,6 @@ def create_stairs_info_file(data_path,
         data_path (str): Path of the data root.
         pkl_prefix (str, optional): Prefix of the info file to be generated.
             Default: 'kitti'.
-        with_plane (bool, optional): Whether to use plane information.
-            Default: False.
         save_path (str, optional): Path to save the info file.
             Default: None.
         relative_path (bool, optional): Whether to use relative path.
@@ -68,31 +66,31 @@ def create_stairs_info_file(data_path,
     else:
         save_path = Path(save_path)
 
-    stairs_infos_train = get_lidar_info(
+    lidar_infos_train = get_lidar_info(
         data_path,
         training=True,
         sample_ids=train_img_ids,
         relative_path=relative_path)
-    _calculate_num_points_in_gt(data_path, stairs_infos_train, relative_path)
+    _calculate_num_points_in_gt(data_path, lidar_infos_train, relative_path)
     filename = save_path / f'{pkl_prefix}_infos_train.pkl'
     print(f'Kitti info train file is saved to {filename}')
-    mmcv.dump(stairs_infos_train, filename)
+    mmcv.dump(lidar_infos_train, filename)
 
-    stairs_infos_val = get_lidar_info(
+    lidar_infos_val = get_lidar_info(
         data_path,
         training=True,
         sample_ids=val_img_ids,
         relative_path=relative_path)
-    _calculate_num_points_in_gt(data_path, stairs_infos_val, relative_path)
+    _calculate_num_points_in_gt(data_path, lidar_infos_val, relative_path)
     filename = save_path / f'{pkl_prefix}_infos_val.pkl'
     print(f'Kitti info val file is saved to {filename}')
-    mmcv.dump(stairs_infos_val, filename)
+    mmcv.dump(lidar_infos_val, filename)
 
     filename = save_path / f'{pkl_prefix}_infos_trainval.pkl'
     print(f'Kitti info trainval file is saved to {filename}')
-    mmcv.dump(stairs_infos_train + stairs_infos_val, filename)
+    mmcv.dump(lidar_infos_train + lidar_infos_val, filename)
 
-    stairs_infos_test = get_lidar_info(
+    lidar_infos_test = get_lidar_info(
         data_path,
         training=False,
         label_info=False,
@@ -100,4 +98,4 @@ def create_stairs_info_file(data_path,
         relative_path=relative_path)
     filename = save_path / f'{pkl_prefix}_infos_test.pkl'
     print(f'Kitti info test file is saved to {filename}')
-    mmcv.dump(stairs_infos_test, filename)
+    mmcv.dump(lidar_infos_test, filename)

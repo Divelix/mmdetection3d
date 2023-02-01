@@ -14,7 +14,8 @@ from tools.data_converter.create_gt_database import (
 def lidar_data_prep(root_path,
                     info_prefix,
                     version,
-                    out_dir):
+                    out_dir,
+                    with_plane=False):
     """Prepare data related to lidar dataset.
 
     Related data consists of '.pkl' files recording basic infos,
@@ -26,7 +27,7 @@ def lidar_data_prep(root_path,
         version (str): Dataset version.
         out_dir (str): Output directory of the groundtruth database info.
     """
-    lidar.create_stairs_info_file(root_path, info_prefix)
+    lidar.create_lidar_info_file(root_path, info_prefix)
 
     # creates dbinfos.pkl
     create_groundtruth_database(
@@ -265,7 +266,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 if __name__ == '__main__':
-    if args.dataset == 'stairs':
+    if args.dataset == 'lidar':
         lidar_data_prep(
             root_path=args.root_path,
             info_prefix=args.extra_tag,
